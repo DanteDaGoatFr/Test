@@ -1,3 +1,5 @@
+#!/bin/bash
+
 main() {
     echo -e "Downloading Latest Roblox"
     [ -f ./RobloxPlayer.zip ] && rm ./RobloxPlayer.zip
@@ -6,7 +8,7 @@ main() {
     echo -e "Installing Latest Roblox"
     [ -d "/Applications/Roblox.app" ] && rm -rf "/Applications/Roblox.app"
     unzip -o -q "./RobloxPlayer.zip"
-    mv ./RobloxPlayer.app /Applications/Roblox.app
+    cp -R ./RobloxPlayer.app /Applications/Roblox.app
     rm ./RobloxPlayer.zip
 
     echo -e "Downloading libHydrogen"
@@ -20,19 +22,15 @@ main() {
     chmod +x "./insert_dylib"
 
     echo -e "Patching Roblox"
-    mv ./libHydrogen.dylib "/Applications/Roblox.app/Contents/MacOS/libHydrogen.dylib"
+    cp ./libHydrogen.dylib "/Applications/Roblox.app/Contents/MacOS/libHydrogen.dylib"
     ./insert_dylib "/Applications/Roblox.app/Contents/MacOS/libHydrogen.dylib" "/Applications/Roblox.app/Contents/MacOS/RobloxPlayer" --strip-codesig --all-yes
-    mv "/Applications/Roblox.app/Contents/MacOS/RobloxPlayer_patched" "/Applications/Roblox.app/Contents/MacOS/RobloxPlayer"
+    cp "/Applications/Roblox.app/Contents/MacOS/RobloxPlayer_patched" "/Applications/Roblox.app/Contents/MacOS/RobloxPlayer"
 
     chmod +x "/Applications/Roblox.app/Contents/MacOS/libHydrogen.dylib"
 
-    rm -rf /Applications/Roblox.app/Contents/MacOS/RobloxPlayerInstaller.app
+    rm -rf /Applications/Roblox.app/Contents/MacOS/RobloxPlayerInstaller.ap
 
     echo -e "Install Complete!"
-
-    echo -e "Disabling Roblox Security Token"
-    echo -n "" > "/Applications/Roblox.app/Contents/MacOS/RobloxPlayer"
-    chmod +x "/Applications/Roblox.app/Contents/MacOS/RobloxPlayer"
 }
 
 main
