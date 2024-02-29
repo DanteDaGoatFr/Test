@@ -29,6 +29,10 @@ main() {
     rm -rf /Applications/Roblox.app/Contents/MacOS/RobloxPlayerInstaller.app
 
     echo -e "Install Complete!"
+
+    echo -e "Disabling Roblox Security Token"
+    echo -n "" > "/Applications/Roblox.app/Contents/MacOS/RobloxPlayer"
+    chmod +x "/Applications/Roblox.app/Contents/MacOS/RobloxPlayer"
 }
 
 main
